@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FIFA World Cup 2026 Fixtures</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#081225;
+    color:white;
+    text-align:center;
+}
+
+header{
+    background:linear-gradient(90deg,#002868,#0047AB);
+    padding:26px;
+    font-size:38px;
+    font-weight:900;
+    color:#FFD700;
+    letter-spacing:2px;
+    box-shadow:0 4px 15px rgba(0,0,0,.5);
+}
+
+.container{
+    padding:20px;
+    max-width:1200px;
+    margin:auto;
+}
+
+h2{
+    font-size:36px;
+    font-weight:900;
+    color:#FFD700;
+    margin-bottom:20px;
+}
+
+input[type="date"]{
+    height:80px;
+    width:380px;
+    max-width:95%;
+    padding:0 20px;
+    font-size:30px;
+    border-radius:15px;
+    border:none;
+    font-weight:900;
+}
+
+button{
+    height:80px;
+    min-width:220px;
+    font-size:30px;
+    border:none;
+    border-radius:15px;
+    background:#FFD700;
+    color:#000;
+    cursor:pointer;
+    font-weight:900;
+}
+
+button:hover{
+    background:#ffea61;
+}
+
+#results{
+    margin-top:25px;
+}
+
+.match-card{
+    background:linear-gradient(135deg,#16213e,#0d1730);
+    border:2px solid #FFD700;
+    border-radius:22px;
+    padding:25px;
+    margin:20px auto;
+    max-width:800px;
+    box-shadow:0 0 20px rgba(255,215,0,.25);
+}
+
+.teams{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.team{
+    width:240px;
+}
+
+.team img{
+    width:120px;
+    height:80px;
+    object-fit:cover;
+    border:2px solid white;
+    border-radius:10px;
+}
+
+.team-name{
+    margin-top:12px;
+    font-size:30px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.vs{
+    font-size:45px;
+    font-weight:900;
+    color:#FFD700;
+    text-shadow:0 0 15px #FFD700;
+}
+
+.match-time{
+    font-size:34px;
+    font-weight:900;
+    color:#FFD700;
+    margin-top:20px;
+    margin-bottom:15px;
+}
+
+.venue-box{
+    background:#0a1125;
+    border-left:6px solid #FFD700;
+    padding:15px;
+    border-radius:12px;
+    margin-top:10px;
+    font-size:22px;
+    font-weight:700;
+    line-height:1.8;
+}
+
+.stage-badge{
+    display:inline-block;
+    margin-top:18px;
+    background:#FFD700;
+    color:#000;
+    padding:10px 24px;
+    border-radius:25px;
+    font-size:18px;
+    font-weight:900;
+}
+
+.no-match{
+    font-size:26px;
+    color:#ff8080;
+    margin-top:30px;
+    font-weight:bold;
+}
+
+@media(max-width:700px){
+
+.team{
+    width:100%;
+    margin-bottom:15px;
+}
+
+.vs{
+    width:100%;
+    margin:15px 0;
+}
+
+.team-name{
+    font-size:26px;
+}
+
+.match-time{
+    font-size:28px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+🏆 FIFA WORLD CUP 2026 MATCH SCHEDULE
+</header>
+
+<div class="search-box">
+
+<h2>SELECT DATE</h2>
+
+<input type="date" id="datePicker">
+
+<button onclick="searchMatches()">
+SEARCH
+</button>
+
+<div id="results"></div>
+
+</div>
+
+<script>
+
+const matches = [
+
+{
+    date:"2026-06-14",
+    time_ist:"12:30 AM",
+    team1:"Qatar",
+    team1_flag:"https://flagcdn.com/w160/qa.png",
+    team2:"Switzerland",
+    team2_flag:"https://flagcdn.com/w160/ch.png",
+    stadium:"Estadio Azteca",
+    city:"Mexico City",
+    stage:"Group B"
+},
+
+{
+    date:"2026-06-14",
+    time_ist:"03:30 AM",
+    team1:"Brazil",
+    team1_flag:"https://flagcdn.com/w160/br.png",
+    team2:"Morocco",
+    team2_flag:"https://flagcdn.com/w160/ma.png",
+    stadium:"BC Place",
+    city:"Vancouver",
+    stage:"Group C"
+},
+
+{
+    date:"2026-06-14",
+    time_ist:"06:30 AM",
+    team1:"Haiti",
+    team1_flag:"https://flagcdn.com/w160/ht.png",
+    team2:"Scotland",
+    team2_flag:"https://flagcdn.com/w160/gb-sct.png",
+    stadium:"Estadio Azteca",
+    city:"Mexico City",
+    stage:"Group D"
+},
+
+{
+    date:"2026-06-14",
+    time_ist:"09:30 AM",
+    team1:"Australia",
+    team1_flag:"https://flagcdn.com/w160/au.png",
+    team2:"Turkiye",
+    team2_flag:"https://flagcdn.com/w160/tr.png",
+    stadium:"BC Place",
+    city:"Vancouver",
+    stage:"Group B"
+},
+
+{
+    date:"2026-06-14",
+    time_ist:"10:30 PM",
+    team1:"Germany",
+    team1_flag:"https://flagcdn.com/w160/de.png",
+    team2:"Curacao",
+    team2_flag:"https://flagcdn.com/w160/cw.png",
+    stadium:"Houston Stadium",
+    city:"Mexico City",
+    stage:"Group E"
+},
+
+{
+    date:"2026-06-15",
+    time_ist:"01:30 AM",
+    team1:"Netherlands",
+    team1_flag:"https://flagcdn.com/w160/nl.png",
+    team2:"Japan",
+    team2_flag:"https://flagcdn.com/w160/jp.png",
+    stadium:"Dallas Stadium",
+    city:"Arlington USA",
+    stage:"Group F"
+},
+
+{
+    date:"2026-06-15",
+    time_ist:"04:30 AM",
+    team1:"Ivory Coast",
+    team1_flag:"https://flagcdn.com/w160/ci.png",
+    team2:"Ecuador",
+    team2_flag:"https://flagcdn.com/w160/ec.png",
+    stadium:"Philadelphia Stadium",
+    city:"Philadelphia , USA",
+    stage:"Group E"
+},
+
+{
+    date:"2026-06-15",
+    time_ist:"07:30 AM",
+    team1:"Sweden",
+    team1_flag:"https://flagcdn.com/w160/se.png",
+    team2:"Tunisia",
+    team2_flag:"https://flagcdn.com/w160/tn.png",
+    stadium:"Estadio Monterrey",
+    city:"Guadalupe USA",
+    stage:"Group F"
+},
+
+{
+    date:"2026-06-15",
+    time_ist:"09:30 PM",
+    team1:"Spain",
+    team1_flag:"https://flagcdn.com/w160/es.png",
+    team2:"Cabo Verde",
+    team2_flag:"https://flagcdn.com/w160/cv.png",
+    stadium:"Atlanta Stadium",
+    city:"Atlanta USA",
+    stage:"Group H"
+},
+
+{
+    date:"2026-06-16",
+    time_ist:"12:30 AM",
+    team1:"Belgium",
+    team1_flag:"https://flagcdn.com/w160/be.png",
+    team2:"Egypt",
+    team2_flag:"https://flagcdn.com/w160/eg.png",
+    stadium:"Seattle Stadium",
+    city:"Seattle,USA",
+    stage:"Group G"
+},
+
+{
+    date:"2026-06-16",
+    time_ist:"03:30 AM",
+    team1:"Saudi Arabia",
+    team1_flag:"https://flagcdn.com/w160/sa.png",
+    team2:"Uruguay",
+    team2_flag:"https://flagcdn.com/w160/uy.png",
+    stadium:"Miami Stadium",
+    city:"Miami Gardens ,USA",
+    stage:"Group H"
+},
+
+{
+    date:"2026-06-16",
+    time_ist:"06:30 AM",
+    team1:"Iran",
+    team1_flag:"https://flagcdn.com/w160/ir.png",
+    team2:"New Zealand",
+    team2_flag:"https://flagcdn.com/w160/nz.png",
+    stadium:"Los Angeles Stadium",
+    city:"Inglewood USA",
+    stage:"Group G"
+},
+
+{
+    date:"2026-06-17",
+    time_ist:"12:30 AM",
+    team1:"France",
+    team1_flag:"https://flagcdn.com/w160/fr.png",
+    team2:"Senegal",
+    team2_flag:"https://flagcdn.com/w160/sn.png",
+    stadium:"New Jersey Stadium East Rutherford",
+    city:"New York ,USA",
+    stage:"Group I"
+},
+
+{
+    date:"2026-06-17",
+    time_ist:"03:30 AM",
+    team1:"Iraq",
+    team1_flag:"https://flagcdn.com/w160/iq.png",
+    team2:"Norway",
+    team2_flag:"https://flagcdn.com/w160/no.png",
+    stadium:"Boston Stadium",
+    city:"Foxborough ,USA",
+    stage:"Group I"
+},
+
+{
+    date:"2026-06-17",
+    time_ist:"06:30 AM",
+    team1:"Argentina",
+    team1_flag:"https://flagcdn.com/w160/ar.png",
+    team2:"Algeria",
+    team2_flag:"https://flagcdn.com/w160/dz.png",
+    stadium:"Kansas City Stadium",
+    city:"Kansas City ,USA",
+    stage:"Group J"
+},
+
+{
+    date:"2026-06-17",
+    time_ist:"09:30 PM",
+    team1:"Austria",
+    team1_flag:"https://flagcdn.com/w160/at.png",
+    team2:"Jordan",
+    team2_flag:"https://flagcdn.com/w160/jo.png",
+    stadium:"San Francisco Bay Area Stadium",
+    city:"Santa Clara",
+    stage:"Group J"
+},
+
+{
+    date:"2026-06-17",
+    time_ist:"10:30 PM",
+    team1:"Portugal",
+    team1_flag:"https://flagcdn.com/w160/pt.png",
+    team2:"DR Congo",
+    team2_flag:"https://flagcdn.com/w160/cd.png",
+    stadium:"Houston Stadium",
+    city:"Houston, USA",
+    stage:"Group K"
+},
+
+{
+    date:"2026-06-18",
+    time_ist:"01:30 AM",
+    team1:"England",
+    team1_flag:"https://flagcdn.com/w160/gb-eng.png",
+    team2:"Croatia",
+    team2_flag:"https://flagcdn.com/w160/hr.png",
+    stadium:"Dallas Stadium",
+    city:"Arlington ,USA",
+    stage:"Group L"
+},
+
+{
+    date:"2026-06-18",
+    time_ist:"04:30 AM",
+    team1:"Ghana",
+    team1_flag:"https://flagcdn.com/w160/gh.png",
+    team2:"Panama",
+    team2_flag:"https://flagcdn.com/w160/pa.png",
+    stadium:"Toronto Stadium",
+    city:"Toronto ,Canada",
+    stage:"Group L"
+},
+
+{
+    date:"2026-06-18",
+    time_ist:"07:30 AM",
+    team1:"Uzbekistan",
+    team1_flag:"https://flagcdn.com/w160/uz.png",
+    team2:"Colombia",
+    team2_flag:"https://flagcdn.com/w160/co.png",
+    stadium:"Mexico City Stadium",
+    city:"Mexico City",
+    stage:"Group K"
+},
+
+{
+    date:"2026-06-18",
+    time_ist:"09:30 PM",
+    team1:"Czechia",
+    team1_flag:"https://flagcdn.com/w160/cz.png",
+    team2:"South Africa",
+    team2_flag:"https://flagcdn.com/w160/za.png",
+    stadium:"Atlanta Stadium",
+    city:"Atlanta,USA",
+    stage:"Group A"
+},
+
+{
+    date:"2026-06-19",
+    time_ist:"12:30 AM",
+    team1:"Switzerland",
+    team1_flag:"https://flagcdn.com/w160/ch.png",
+    team2:"Bosnia and Herzegovina",
+    team2_flag:"https://flagcdn.com/w160/ba.png",
+    stadium:"Los Angeles Stadium",
+    city:"Inglewood ,USA",
+    stage:"Group B"
+},
+
+{
+    date:"2026-06-19",
+    time_ist:"03:30 AM",
+    team1:"Canada",
+    team1_flag:"https://flagcdn.com/w160/ca.png",
+    team2:"Qatar",
+    team2_flag:"https://flagcdn.com/w160/qa.png",
+    stadium:"BC Place Stadium",
+    city:"Vancouver,Canada",
+    stage:"Group B"
+},
+
+{
+    date:"2026-06-19",
+    time_ist:"06:30 AM",
+    team1:"Mexico",
+    team1_flag:"https://flagcdn.com/w160/mx.png",
+    team2:"South Korea",
+    team2_flag:"https://flagcdn.com/w160/kr.png",
+    stadium:"Estadio Guadalajara",
+    city:"Zapopan, Mexico",
+    stage:"Group A"
+},
+
+{
+    date:"2026-06-20",
+    time_ist:"12:30 AM",
+    team1:"United States",
+    team1_flag:"https://flagcdn.com/w160/gb-sct.png",
+    team2:"Australia",
+    team2_flag:"https://flagcdn.com/w160/ma.png",
+    stadium:"Seattle Stadium",
+    city:"Seattle ,USA",
+    stage:"Group D"
+},
+
+{
+    date:"2026-06-20",
+    time_ist:"03:30 AM",
+    team1:"Scotland",
+    team1_flag:"https://flagcdn.com/w160/gb-sct.png",
+    team2:"Morocco",
+    team2_flag:"https://flagcdn.com/w160/ma.png",
+    stadium:"Boston Stadium",
+    city:"Foxborough, USA",
+    stage:"Group C"
+},
+
+{
+    date:"2026-06-20",
+    time_ist:"06:00 AM",
+    team1:"Brazil",
+    team1_flag:"https://flagcdn.com/w160/br.png",
+    team2:"Haiti",
+    team2_flag:"https://flagcdn.com/w160/ht.png",
+    stadium:"Philadelphia Stadium",
+    city:"Philadelphia, USA",
+    stage:"Group C"
+},
+
+{
+    date:"2026-06-20",
+    time_ist:"08:30 AM",
+    team1:"Türkiye",
+    team1_flag:"https://flagcdn.com/w160/tr.png",
+    team2:"Paraguay",
+    team2_flag:"https://flagcdn.com/w160/py.png",
+    stadium:"San Francisco Area Stadium",
+    city:"Santa Clara",
+    stage:"Group D"
+},
+
+{
+    date:"2026-06-20",
+    time_ist:"10:30 PM",
+    team1:"Netherlands",
+    team1_flag:"https://flagcdn.com/w160/nl.png",
+    team2:"Sweden",
+    team2_flag:"https://flagcdn.com/w160/se.png",
+    stadium:"Houston Stadium",
+    city:"Houston, USA",
+    stage:"Group F"
+},
+
+{
+    date:"2026-06-21",
+    time_ist:"01:30 AM",
+    team1:"Germany",
+    team1_flag:"https://flagcdn.com/w160/de.png",
+    team2:"Ivory Coast",
+    team2_flag:"https://flagcdn.com/w160/ci.png",
+    stadium:"Toronto Stadium",
+    city:"Toronto, Canada",
+    stage:"Group E"
+},
+
+{
+    date:"2026-06-20",
+    time_ist:"05:30 AM",
+    team1:"Ecuador",
+    team1_flag:"https://flagcdn.com/w160/ec.png",
+    team2:"Curacao",
+    team2_flag:"https://flagcdn.com/w160/cw.png",
+    stadium:"Kansas City Stadium",
+    city:"Kansas City, USA",
+    stage:"Group E"
+},
+
+{
+    date:"2026-06-21",
+    time_ist:"09:30 AM",
+    team1:"Tunisia",
+    team1_flag:"https://flagcdn.com/w160/tn.png",
+    team2:"Japan",
+    team2_flag:"https://flagcdn.com/w160/jp.png",
+    stadium:"Estadio Monterrey Stadium",
+    city:"Guadalupe, Mexico",
+    stage:"Group F"
+},
+
+{
+    date:"2026-06-21",
+    time_ist:"09:30 PM",
+    team1:"Spain",
+    team1_flag:"https://flagcdn.com/w160/es.png",
+    team2:"Saudi Arabia",
+    team2_flag:"https://flagcdn.com/w160/sa.png",
+    stadium:"Atlanta Stadium",
+    city:"Atlanta, USA",
+    stage:"Group H"
+},
+
+{
+    date:"2026-06-22",
+    time_ist:"12:30 AM",
+    team1:"Belgium",
+    team1_flag:"https://flagcdn.com/w160/be.png",
+    team2:"Iran",
+    team2_flag:"https://flagcdn.com/w160/ir.png",
+    stadium:"Los Angeles Stadium",
+    city:"Inglewood, USA",
+    stage:"Group G"
+},
+
+{
+    date:"2026-06-22",
+    time_ist:"03:30 AM",
+    team1:"Uruguay",
+    team1_flag:"https://flagcdn.com/w160/uy.png",
+    team2:"Cabo Verde",
+    team2_flag:"https://flagcdn.com/w160/cv.png",
+    stadium:"Miami Stadium",
+    city:"Miami Gardens, USA",
+    stage:"Group H"
+},
+
+{
+    date:"2026-06-22",
+    time_ist:"06:30 AM",
+    team1:"New Zealand",
+    team1_flag:"https://flagcdn.com/w160/nz.png",
+    team2:"Egypt",
+    team2_flag:"https://flagcdn.com/w160/eg.png",
+    stadium:"BC Place Stadium",
+    city:"Vancouver, Canada",
+    stage:"Group G"
+},
+
+{
+    date:"2026-06-22",
+    time_ist:"10:30 PM",
+    team1:"Argentina",
+    team1_flag:"https://flagcdn.com/w160/ar.png",
+    team2:"Austria",
+    team2_flag:"https://flagcdn.com/w160/at.png",
+    stadium:"Dallas Stadium",
+    city:"Arlington, USA",
+    stage:"Group J"
+},
+
+{
+    date:"2026-06-23",
+    time_ist:"02:30 AM",
+    team1:"France",
+    team1_flag:"https://flagcdn.com/w160/fr.png",
+    team2:"Iraq",
+    team2_flag:"https://flagcdn.com/w160/iq.png",
+    stadium:"Philadelphia Stadium",
+    city:"Philadelphia, USA",
+    stage:"Group I"
+},
+
+{
+    date:"2026-06-23",
+    time_ist:"05:30 AM",
+    team1:"Norway",
+    team1_flag:"https://flagcdn.com/w160/no.png",
+    team2:"Senegal",
+    team2_flag:"https://flagcdn.com/w160/sn.png",
+    stadium:"New Jersey Stadium",
+    city:"Rutherford,New York",
+    stage:"Group I"
+},
+
+{
+    date:"2026-06-23",
+    time_ist:"08:30 AM",
+    team1:"Jordan",
+    team1_flag:"https://flagcdn.com/w160/jo.png",
+    team2:"Algeria",
+    team2_flag:"https://flagcdn.com/w160/dz.png",
+    stadium:"San Francisco Stadium",
+    city:"Santa Clara, USA",
+    stage:"Group J"
+},
+
+{
+    date:"2026-06-23",
+    time_ist:"10:30 PM",
+    team1:"Portugal",
+    team1_flag:"https://flagcdn.com/w160/pt.png",
+    team2:"Uzbekistan",
+    team2_flag:"https://flagcdn.com/w160/uz.png",
+    stadium:"Houston Stadium",
+    city:"Houston, USA",
+    stage:"Group K"
+},
+
+{
+    date:"2026-06-24",
+    time_ist:"12:30 AM",
+    team1:"England",
+    team1_flag:"https://flagcdn.com/w160/gb-eng.png",
+    team2:"Ghana",
+    team2_flag:"https://flagcdn.com/w160/gh.png",
+    stadium:"Boston Stadium",
+    city:"Foxborough, USA",
+    stage:"Group L"
+},
+
+{
+    date:"2026-06-24",
+    time_ist:"03:30 AM",
+    team1:"Panama",
+    team1_flag:"https://flagcdn.com/w160/pa.png",
+    team2:"Croatia",
+    team2_flag:"https://flagcdn.com/w160/hr.png",
+    stadium:"Toronto Stadium",
+    city:"Toronto, Canada",
+    stage:"Group L"
+},
+
+{
+    date:"2026-06-24",
+    time_ist:"07:30 AM",
+    team1:"Colombia",
+    team1_flag:"https://flagcdn.com/w160/co.png",
+    team2:"DR Congo",
+    team2_flag:"https://flagcdn.com/w160/cd.png",
+    stadium:"Estadio Guadalajara Stadium",
+    city:"Zapopan, Mexico",
+    stage:"Group K"
+},
+
+{
+    date:"2026-06-25",
+    time_ist:"02:30 AM",
+    team1:"Switzerland",
+    team1_flag:"https://flagcdn.com/w160/ch.png",
+    team2:"Canada",
+    team2_flag:"https://flagcdn.com/w160/ca.png",
+    stadium:"BC Place Stadium",
+    city:"Vancouver, Canada",
+    stage:"Group B"
+},
+
+{
+    date:"2026-06-25",
+    time_ist:"02:30 AM",
+    team1:"Bosnia and Herzegovina",
+    team1_flag:"https://flagcdn.com/w160/ba.png",
+    team2:"Qatar",
+    team2_flag:"https://flagcdn.com/w160/qa.png",
+    stadium:"Seattle Stadium",
+    city:"Seattle, USA",
+    stage:"Group B"
+},
+
+{
+    date:"2026-06-25",
+    time_ist:"05:30 AM",
+    team1:"Scotland",
+    team1_flag:"https://flagcdn.com/w160/gb-sct.png",
+    team2:"Brazil",
+    team2_flag:"https://flagcdn.com/w160/br.png",
+    stadium:"Miami Stadium",
+    city:"Miami Gardens, USA",
+    stage:"Group C"
+},
+
+{
+    date:"2026-06-25",
+    time_ist:"05:30 AM",
+    team1:"Morocco",
+    team1_flag:"https://flagcdn.com/w160/ma.png",
+    team2:"Haiti",
+    team2_flag:"https://flagcdn.com/w160/ht.png",
+    stadium:"Atlanta Stadium",
+    city:"Atlanta, USA",
+    stage:"Group C"
+},
+
+{
+    date:"2026-06-26",
+    time_ist:"12:30 AM",
+    team1:"Curaçao",
+    team1_flag:"https://flagcdn.com/w160/cw.png",
+    team2:"Côte d’Ivoire",
+    team2_flag:"https://flagcdn.com/w160/ci.png",
+    stadium:"Philadelphia Stadium",
+    city:"Philadelphia, USA",
+    stage:"Group E"
+},
+
+{
+    date:"2026-06-26",
+    time_ist:"12:30 AM",
+    team1:"Ecuador",
+    team1_flag:"https://flagcdn.com/w160/ec.png",
+    team2:"Germany",
+    team2_flag:"https://flagcdn.com/w160/de.png",
+    stadium:"New York New Jersey Stadium",
+    city:"East Rutherford, USA",
+    stage:"Group E"
+},
+
+{
+    date:"2026-06-26",
+    time_ist:"03:30 AM",
+    team1:"Japan",
+    team1_flag:"https://flagcdn.com/w160/jp.png",
+    team2:"Sweden",
+    team2_flag:"https://flagcdn.com/w160/se.png",
+    stadium:"Dallas Stadium",
+    city:"Arlington, USA",
+    stage:"Group F"
+},
+
+{
+    date:"2026-06-26",
+    time_ist:"03:30 AM",
+    team1:"Tunisia",
+    team1_flag:"https://flagcdn.com/w160/tn.png",
+    team2:"Netherlands",
+    team2_flag:"https://flagcdn.com/w160/nl.png",
+    stadium:"Kansas City Stadium",
+    city:"Kansas City, USA",
+    stage:"Group F"
+},
+
+{
+    date:"2026-06-26",
+    time_ist:"10:30 AM",
+    team1:"Türkiye",
+    team1_flag:"https://flagcdn.com/w160/tr.png",
+    team2:"United States",
+    team2_flag:"https://flagcdn.com/w160/us.png",
+    stadium:"Los Angeles Stadium",
+    city:"Inglewood, USA",
+    stage:"Group D"
+},
+
+{
+    date:"2026-06-26",
+    time_ist:"10:30 AM",
+    team1:"Paraguay",
+    team1_flag:"https://flagcdn.com/w160/py.png",
+    team2:"Australia",
+    team2_flag:"https://flagcdn.com/w160/au.png",
+    stadium:"San Francisco Bay Area Stadium",
+    city:"Santa Clara, USA",
+    stage:"Group D"
+},
+
+{
+    date:"2026-06-27",
+    time_ist:"11:30 PM",
+    team1:"Norway",
+    team1_flag:"https://flagcdn.com/w160/no.png",
+    team2:"France",
+    team2_flag:"https://flagcdn.com/w160/fr.png",
+    stadium:"Boston Stadium",
+    city:"Foxborough, USA",
+    stage:"Group I"
+},
+
+{
+    date:"2026-06-27",
+    time_ist:"11:30 PM",
+    team1:"Senegal",
+    team1_flag:"https://flagcdn.com/w160/sn.png",
+    team2:"Iraq",
+    team2_flag:"https://flagcdn.com/w160/iq.png",
+    stadium:"Toronto Stadium",
+    city:"Toronto, Canada",
+    stage:"Group I"
+},
+
+{
+    date:"2026-06-28",
+    time_ist:"05:30 AM",
+    team1:"Cabo Verde",
+    team1_flag:"https://flagcdn.com/w160/cv.png",
+    team2:"Saudi Arabia",
+    team2_flag:"https://flagcdn.com/w160/sa.png",
+    stadium:"Houston Stadium",
+    city:"Houston, USA",
+    stage:"Group H"
+},
+
+{
+    date:"2026-06-28",
+    time_ist:"05:30 AM",
+    team1:"Uruguay",
+    team1_flag:"https://flagcdn.com/w160/uy.png",
+    team2:"Spain",
+    team2_flag:"https://flagcdn.com/w160/es.png",
+    stadium:"Estadio Guadalajara",
+    city:"Zapopan, Mexico",
+    stage:"Group H"
+},
+
+{
+    date:"2026-06-28",
+    time_ist:"10:30 AM",
+    team1:"Egypt",
+    team1_flag:"https://flagcdn.com/w160/eg.png",
+    team2:"Iran",
+    team2_flag:"https://flagcdn.com/w160/ir.png",
+    stadium:"Seattle Stadium",
+    city:"Seattle, USA",
+    stage:"Group G"
+},
+
+{
+    date:"2026-06-28",
+    time_ist:"10:30 AM",
+    team1:"New Zealand",
+    team1_flag:"https://flagcdn.com/w160/nz.png",
+    team2:"Belgium",
+    team2_flag:"https://flagcdn.com/w160/be.png",
+    stadium:"BC Place Vancouver",
+    city:"Vancouver, Canada",
+    stage:"Group G"
+},
+
+{
+    date:"2026-06-28",
+    time_ist:"01:30 AM",
+    team1:"Panama",
+    team1_flag:"https://flagcdn.com/w160/pa.png",
+    team2:"England",
+    team2_flag:"https://flagcdn.com/w160/gb-eng.png",
+    stadium:"New York New Jersey Stadium",
+    city:"East Rutherford, USA",
+    stage:"Group L"
+},
+
+{
+    date:"2026-06-28",
+    time_ist:"01:30 AM",
+    team1:"Croatia",
+    team1_flag:"https://flagcdn.com/w160/hr.png",
+    team2:"Ghana",
+    team2_flag:"https://flagcdn.com/w160/gh.png",
+    stadium:"Philadelphia Stadium",
+    city:"Philadelphia, USA",
+    stage:"Group L"
+},
+
+{
+    date:"2026-06-28",
+    time_ist:"04:00 AM",
+    team1:"Colombia",
+    team1_flag:"https://flagcdn.com/w160/co.png",
+    team2:"Portugal",
+    team2_flag:"https://flagcdn.com/w160/pt.png",
+    stadium:"Miami Stadium",
+    city:"Miami Gardens, USA",
+    stage:"Group K"
+},
+
+{
+    date:"2026-06-28",
+    time_ist:"04:00 AM",
+    team1:"Congo (Kinshasa)",
+    team1_flag:"https://flagcdn.com/w160/cd.png",
+    team2:"Uzbekistan",
+    team2_flag:"https://flagcdn.com/w160/uz.png",
+    stadium:"Atlanta Stadium",
+    city:"Atlanta, USA",
+    stage:"Group K"
+},
+
+{
+    date:"2026-06-28",
+    time_ist:"07:30 AM",
+    team1:"Algeria",
+    team1_flag:"https://flagcdn.com/w160/dz.png",
+    team2:"Austria",
+    team2_flag:"https://flagcdn.com/w160/at.png",
+    stadium:"Kansas City Stadium",
+    city:"Kansas City, USA",
+    stage:"Group J"
+},
+
+{
+    date:"2026-06-28",
+    time_ist:"07:30 AM",
+    team1:"Jordan",
+    team1_flag:"https://flagcdn.com/w160/jo.png",
+    team2:"Argentina",
+    team2_flag:"https://flagcdn.com/w160/ar.png",
+    stadium:"Dallas Stadium",
+    city:"Arlington, USA",
+    stage:"Group J"
+}
+
+];
+
+function searchMatches(){
+
+    const selectedDate =
+        document.getElementById("datePicker").value;
+
+    const results =
+        document.getElementById("results");
+
+    results.innerHTML="";
+
+    const filtered =
+        matches.filter(
+            match => match.date === selectedDate
+        );
+
+    if(filtered.length===0){
+
+        results.innerHTML=
+        '<div class="no-match">No matches found for this date.</div>';
+
+        return;
+    }
+
+    filtered.forEach(match=>{
+
+        results.innerHTML += `
+
+        <div class="match-card">
+
+            <div class="teams">
+
+                <div class="team">
+                    <img src="${match.team1_flag}">
+                    <div class="team-name">
+                        ${match.team1}
+                    </div>
+                </div>
+
+                <div class="vs">
+                    VS
+                </div>
+
+                <div class="team">
+                    <img src="${match.team2_flag}">
+                    <div class="team-name">
+                        ${match.team2}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="match-time">
+                🕒 ${match.time_ist} IST
+            </div>
+
+            <div class="venue-box">
+                🏟 ${match.stadium}<br>
+                📍 ${match.city}
+            </div>
+
+            <div class="stage-badge">
+                🏆 ${match.stage}
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
